@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Computer Science Graduate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle {
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .skill-bar {
+            transition: width 1.5s ease;
+        }
+
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dark {
+            background-color: #1a1a2e;
+            color: #f8f9fa;
+        }
+
+        .dark .bg-white {
+            background-color: #16213e !important;
+            color: #f8f9fa;
+        }
+
+        .dark .text-gray-700 {
+            color: #e2e8f0 !important;
+        }
+
+        .dark .text-gray-800 {
+            color: #f8f9fa !important;
+        }
+
+        .dark .bg-gray-100 {
+            background-color: #16213e !important;
+        }
+
+        .dark .border-gray-200 {
+            border-color: #2d3748 !important;
+        }
+
+        .hero-image {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="fixed right-6 top-6 z-50 p-2 rounded-full bg-white shadow-lg theme-toggle">
+        <i class="fas fa-moon text-gray-800"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav
+        class="fixed w-full bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg z-40 shadow-sm dark:bg-gray-900 dark:bg-opacity-90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-gray-900 dark:text-white">Portfolio</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home"
+                        class="nav-link text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white">Home</a>
+                    <a href="#about"
+                        class="nav-link text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white">About</a>
+                    <a href="#skills"
+                        class="nav-link text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white">Skills</a>
+                    <a href="#projects"
+                        class="nav-link text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white">Projects</a>
+                    <a href="#experience"
+                        class="nav-link text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white">Experience</a>
+                    <a href="#contact"
+                        class="nav-link text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Home</a>
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">About</a>
+                <a href="#skills"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Skills</a>
+                <a href="#projects"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Projects</a>
+                <a href="#experience"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Experience</a>
+                <a href="#contact"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 pb-12 px-4 sm:px-6 lg:px-8 section">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900 dark:text-white">
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Computer
+                            Science Graduate</span>
+                        <br><span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">Data
+                            Science & Software Development Enthusiast</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
+                        Passionate about Data Science, Software Development, Web Development, and Machine Learning.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#projects"
+                            class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:opacity-90 transition duration-300 shadow-lg">
+                            View My Work
+                        </a>
+                        <a href="#contact"
+                            class="px-6 py-3 border-2 border-blue-500 text-blue-500 dark:text-purple-600 dark:border-purple-800 rounded-lg font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition duration-300">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80"
+                        alt="Developer Illustration" class="w-3/4 md:w-full max-w-md hero-image rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 section">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+                About <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Me</span>
+            </h2>
+
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3 flex justify-center">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQG32SKylSmTyQ/profile-displayphoto-crop_800_800/B4EZiZEupAHoAQ-/0/1754914813364?e=1759363200&v=beta&t=fPe1KUQ9hDJqqQyB_cdUj6kq0bJHOYs67Q4-TVXkvpA"
+                        alt="Profile Photo"
+                        class="w-64 h-64 rounded-full object-cover shadow-xl border-4 border-white dark:border-gray-800">
+                </div>
+                <div class="md:w-2/3">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">
+                        I'm a computer science graduate passionate about technology and innovation.
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        I'm a computer science graduate passionate about data science, software development, web
+                        development, and machine learning. I enjoy solving problems, building innovative solutions, and
+                        continuously learning new technologies.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        My journey in technology began during my university years when I discovered the power of
+                        programming to solve real-world problems. Since then, I've been on a continuous learning path,
+                        exploring various domains from data analysis to full-stack development.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap text-blue-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Computer Science</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-code text-purple-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Full-Stack Dev</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-chart-line text-blue-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Data Science</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-brain text-purple-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Machine Learning</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-server text-blue-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Backend</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-paint-brush text-purple-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 section">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-blue-500">
+                My <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Skills</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Technical Skills -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-purple-600 flex items-center">
+                        <i class="fas fa-code mr-3 text-blue-500"></i> Technical Skills
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700 dark:text-gray-300 font-medium">Python</span>
+                                <span class="text-gray-500 dark:text-gray-400">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-blue-500 h-2.5 rounded-full skill-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700 dark:text-gray-300 font-medium">JavaScript</span>
+                                <span class="text-gray-500 dark:text-gray-400">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-purple-500 h-2.5 rounded-full skill-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700 dark:text-gray-300 font-medium">React</span>
+                                <span class="text-gray-500 dark:text-gray-400">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-blue-500 h-2.5 rounded-full skill-bar" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700 dark:text-gray-300 font-medium">Flask</span>
+                                <span class="text-gray-500 dark:text-gray-400">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-purple-500 h-2.5 rounded-full skill-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700 dark:text-gray-300 font-medium">SQL</span>
+                                <span class="text-gray-500 dark:text-gray-400">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-blue-500 h-2.5 rounded-full skill-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Skills -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-blue-500 flex items-center">
+                        <i class="fas fa-briefcase mr-3 text-purple-500"></i> Professional <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Focus</span>
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div
+                            class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 dark:bg-gray-800">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-100 p-3 rounded-full dark:bg-blue-900">
+                                    <i class="fas fa-chart-line text-blue-500 dark:text-blue-300 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-800 dark:text-white">Data Scientist</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">
+                                        Analyzing complex datasets, building predictive models, and extracting valuable
+                                        insights to drive business decisions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 dark:bg-gray-800">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-purple-100 p-3 rounded-full dark:bg-purple-900">
+                                    <i class="fas fa-code text-purple-500 dark:text-purple-300 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-800 dark:text-white">Software Developer
+                                    </h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">
+                                        Designing and implementing efficient, scalable software solutions to meet
+                                        business requirements.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 dark:bg-gray-800">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-100 p-3 rounded-full dark:bg-blue-900">
+                                    <i class="fas fa-laptop-code text-blue-500 dark:text-blue-300 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-800 dark:text-white">Frontend Developer
+                                    </h4>
+                                    <p class="text-gray-600 dark:text-gray-300 mt-1">
+                                        Creating responsive, user-friendly interfaces with modern frameworks and best
+                                        practices.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 section">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+                My <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Projects</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-card dark:bg-gray-800">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Medicine Recommendation System" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Medicine Recommendation System
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A machine learning system that recommends appropriate medications based on patient symptoms
+                            and medical history.
+                        </p>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-2 dark:bg-blue-900 dark:text-blue-200">Python</span>
+                            <span
+                                class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mr-2 dark:bg-purple-900 dark:text-purple-200">Scikit-learn</span>
+                            <span
+                                class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full dark:bg-green-900 dark:text-green-200">Flask</span>
+                        </div>
+                        <a href="https://github.com/Noba21/"
+                            class="text-blue-500 hover:text-blue-700 font-medium inline-flex items-center dark:text-blue-400">
+                            View on GitHub <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-card dark:bg-gray-800">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80"
+                        alt="House Price Prediction" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">House Price Prediction</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A regression model that predicts house prices based on various features like location, size,
+                            amenities, etc.
+                        </p>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-2 dark:bg-blue-900 dark:text-blue-200">Python</span>
+                            <span
+                                class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mr-2 dark:bg-purple-900 dark:text-purple-200">numpy</span>
+                            <span
+                                class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full dark:bg-yellow-900 dark:text-yellow-200">Pandas</span>
+                        </div>
+                        <a href="https://github.com/Noba21/house_price_prediciton"
+                            class="text-blue-500 hover:text-blue-700 font-medium inline-flex items-center dark:text-blue-400">
+                            View on GitHub <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg project-card dark:bg-gray-800">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Image Classification" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Image Classification</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A deep learning model that classifies images into different categories with high accuracy.
+                        </p>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-2 dark:bg-blue-900 dark:text-blue-200">Python</span>
+                            <span
+                                class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mr-2 dark:bg-purple-900 dark:text-purple-200">PyTorch</span>
+                            <span
+                                class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full dark:bg-red-900 dark:text-red-200">OpenCV</span>
+                        </div>
+                        <a href="https://github.com/Noba21/classify_image_of_cats_and_dogs"
+                            class="text-blue-500 hover:text-blue-700 font-medium inline-flex items-center dark:text-blue-400">
+                            View on GitHub <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="https://github.com/Noba21/"
+                    class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:opacity-90 transition duration-300 shadow-lg inline-flex items-center">
+                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 section">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-purple-600">
+                My <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Experience</span>
+            </h2>
+
+            <div class="space-y-8">
+                <!-- Experience 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 dark:bg-gray-800">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Machine Learning Intern</h3>
+                            <p class="text-blue-500 dark:text-blue-400 font-medium">Prodigy Infotech</p>
+                        </div>
+                        <div class="mt-2 md:mt-0">
+                            <span
+                                class="inline-block bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full dark:bg-gray-700 dark:text-gray-300">June
+                                2022 - August 2022</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>Developed and optimized machine learning models for predictive analytics.</li>
+                            <li>Collaborated with the data science team to clean and preprocess large datasets.</li>
+                            <li>Implemented natural language processing techniques for text classification tasks.</li>
+                            <li>Created data visualizations to communicate insights to stakeholders.</li>
+                            <li>Participated in code reviews and contributed to improving model accuracy.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="mt-12">
+                    <h3 class="ttext-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-purple-500">
+                        <i class="fas fa-certificate mr-3 text-purple-500"></i> Certifications <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">&
+                            Learning</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-xl shadow-md p-6 dark:bg-gray-800">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-3 rounded-full dark:bg-blue-900">
+                                    <i class="fas fa-chart-bar text-blue-500 dark:text-blue-300"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-800 dark:text-white">Data Analytics</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Udacity</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Completed comprehensive training in data analysis, visualization, and storytelling with
+                                data.
+                            </p>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 dark:bg-gray-800">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-purple-100 p-3 rounded-full dark:bg-purple-900">
+                                    <i class="fas fa-network-wired text-purple-500 dark:text-purple-300"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-800 dark:text-white">CCNA</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Cisco Networking Academy</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Gained expertise in networking fundamentals, IP services, security fundamentals, and
+                                automation.
+                            </p>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 dark:bg-gray-800">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-full dark:bg-green-900">
+                                    <i class="fab fa-python text-green-500 dark:text-green-300"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-800 dark:text-white">Python Essentials</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Cisco</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Mastered Python programming fundamentals, data structures, and object-oriented
+                                programming.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 section">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+                Get In <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Touch</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Contact Information</h3>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-100 p-3 rounded-full dark:bg-blue-900">
+                                <i class="fas fa-envelope text-blue-500 dark:text-blue-300"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-800 dark:text-white">Email</h4>
+                                <p class="text-gray-600 dark:text-gray-300">nobelwub2005@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-purple-100 p-3 rounded-full dark:bg-purple-900">
+                                <i class="fab fa-linkedin-in text-purple-500 dark:text-purple-300"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-800 dark:text-white">LinkedIn</h4>
+                                <p class="text-gray-600 dark:text-gray-300">linkedin.com/in/nobel-wubtaye-592585373</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-gray-100 p-3 rounded-full dark:bg-gray-700">
+                                <i class="fab fa-github text-gray-800 dark:text-gray-300"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-800 dark:text-white">GitHub</h4>
+                                <p class="text-gray-600 dark:text-gray-300">github.com/Noba21/</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h4 class="text-lg font-medium mb-4 text-gray-800 dark:text-white">Let's Connect</h4>
+                        <div class="flex space-x-4">
+                            <a href="#"
+                                class="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#"
+                                class="bg-purple-500 text-white p-3 rounded-full hover:bg-purple-600 transition duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://github.com/Noba21/"
+                                class="bg-gray-800 text-white p-3 rounded-full hover:bg-gray-700 transition duration-300 dark:bg-gray-700 dark:hover:bg-gray-600">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="linkedin.com/in/nobel-wubtaye-592585373"
+                                class="bg-blue-700 text-white p-3 rounded-full hover:bg-blue-800 transition duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <form id="contact-form" class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-800">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Your
+                                Name</label>
+                            <input type="text" id="name" name="from_name" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Email
+                                Address</label>
+                            <input type="email" id="email" name="reply_to" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="message"
+                                class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Message</label>
+                            <textarea id="message" name="message" rows="5" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:opacity-90 transition duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold">Portfolio</h2>
+                    <p class="text-gray-400 mt-2">Computer Science Graduate | Data Science & Software Development
+                        Enthusiast</p>
+                </div>
+
+                <div class="flex space-x-6">
+                    <a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition duration-300">About</a>
+                    <a href="#skills" class="text-gray-400 hover:text-white transition duration-300">Skills</a>
+                    <a href="#projects" class="text-gray-400 hover:text-white transition duration-300">Projects</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 Portfolio. All rights reserved.</p>
+
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="linkedin.com/in/nobel-wubtaye-592585373"
+                        class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/Noba21/" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("eB4EnArLN8HxFDvan");
+        })();
+
+        document.getElementById("contact-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            emailjs.sendForm("service_rmmhqfv", "template_1ry3kkp", this)
+                .then(function () {
+                    alert("Message sent successfully! ✅");
+                    document.getElementById("contact-form").reset();
+                }, function (error) {
+                    alert("Failed to send message ❌\n" + JSON.stringify(error));
+                });
+        });
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400"></i>';
+        } else {
+            html.classList.remove('dark');
+            themeToggle.innerHTML = '<i class="fas fa-moon text-gray-800"></i>';
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon text-gray-800"></i>';
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400"></i>';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Scroll to sections smoothly
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate sections when they come into view
+        const sections = document.querySelectorAll('.section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll('.skill-bar');
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+
+    </script>
+</body>
+
+</html>
